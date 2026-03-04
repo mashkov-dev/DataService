@@ -38,7 +38,7 @@ local d = DataService.d
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UseMock: boolean?` — use empty Profile (for testing)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DontSave: boolean?` — don't apply changes to data (for testing)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ViewedUserId: number?` — play on data of user with id `userId`, but don't apply changes to it (for debugging)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`OverridenUserId: number?` — play on data of user with id `userId` and apply changes to it (for debugging)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`OverriddenUserId: number?` — play on data of user with id `userId` and apply changes to it (for debugging)<br>
 
 #### `DataService:Init(options: Options): ()`
 Initializes DataService on server.
