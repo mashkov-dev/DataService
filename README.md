@@ -2,7 +2,7 @@
 
 # DataService
 
-## Lightweight player data handler with autocomplete and typechecking.
+## Lightweight player data service with autocomplete and typechecking.
 
 </div>
 
