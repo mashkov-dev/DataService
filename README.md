@@ -32,8 +32,42 @@ local d = DataService.d
 
 ## Server API
 
-`type Options = {`
-`  Template: any` fff
-`
+`type Options = {`<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Template: any` — table that contains template of data<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DatastoreKey: string` — key which will be used in ProfileStore<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UseMock: boolean?` — use empty Profile (for testing)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DontSave: boolean?` — don't apply changes to data (for testing)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ViewedUserId: number?` — play on data of user with id `userId`, but don't apply changes to it (for debugging)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`OverridenUserId: number?` — play on data of user with id `userId` and apply changes to it (for debugging)<br>
 
-`DataService`
+#### `DataService:Init(options: Options): ()`
+Initializes DataService on server.
+
+```lua
+DataService:Init({
+	Template = DataTemplate,
+	DatastoreKey = "Test"
+})
+```
+---
+`type Data = typeof(d)`
+#### `DataService.onPlayerInit(player: Player, data: Data): ()`
+Overridable method which is called before data is sent to client and before any other script starts to modify player data. Doesn't trigger any signals.
+
+> [!NOTE]
+> It is recommended to use `onPlayerInit(...)` only for testing when you want to tweak some values in player data before client and other scripts access it. Use `DataLoaded` signal instead if you want to modify data of a player before it will be sent to him.
+
+> [!CAUTION]
+> Override this method before calling `:Init(...)`
+
+```lua
+type Data = typeof(d)
+
+DataService.onPlayerInit = function(player: Player, data: Data)
+	data.coins = 5
+	table.insert(data.weapons, 50)
+end
+```
+---
+#### `DataService.DataLoaded(player: Player, data: Data): ()`
+Overridable method which is called before data is sent to client and before any other script starts to modify player data. Doesn't trigger any signals.
