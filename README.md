@@ -152,7 +152,6 @@ Returns signal which is fired when `DataService:Set(player, path[key], ...)` or 
 ```lua
 DataService:GetKeyChangedSignal(player, d.Blasters):Connect(function(blasterId: string, blaster: Blaster)
 	print(blasterId, blaster) -- uniqueId, {Damage = 300}
-
 end)
 
 
