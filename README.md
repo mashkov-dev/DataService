@@ -80,7 +80,7 @@ end
 ```
 ---
 #### `DataService.Get<T>(self: DataService, player: Player, path: T): T`
-Returns data of `player` on path `path`. You can also index path with different values.
+Returns data of `player` on path `path`. You can also index path with different values. And you will still get autocomplete.
 
 ```lua
 local coins = DataService:Get(d.Coins)
