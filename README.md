@@ -65,7 +65,7 @@ DataService:Init({
 Overridable method which is called before data is sent to client and before any other script starts to modify player data. Doesn't trigger any signals. Empty by default.
 
 > [!NOTE]
-> It is recommended to use `onPlayerInit(...)` only for testing when you want to tweak some values in player data before client and other scripts access it. Use `DataLoaded` signal instead if you want to modify data of a player before it will be sent to him.
+> It is recommended to use `onPlayerInit(...)` only for testing when you want to tweak some values in player's data before client and other scripts access it. Use `DataLoaded` signal instead if you want to modify data of a player before it will be sent to him or when you just want to react on player's data.
 
 > [!CAUTION]
 > Override this method before calling `:Init(...)` and use only "raw" data (don't call any API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc).
@@ -187,7 +187,7 @@ local value = DataService:Remove(player, d.FriendIds, 3)
 ```
 ---
 #### `DataService.DataLoaded: Signal<Player>`
-Returns signal which is fired AFTER `.onPlayerInit(player, data)` finished its execution but BEFORE data was sent to client. Use API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc. to read/write into the data before it will be sent to client. Only server-side data signals will react to this changes.
+Returns signal which is fired AFTER `.onPlayerInit(player, data)` finished its execution but BEFORE data was sent to client. Use API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc. to read/write into the data before it will be sent to client. Only server-side data signals will react to this changes (considering that callback doesn't yield).
 ```lua
 DataService.DataLoaded:Connect(function(player: Player)
 	if os.clock() - DataService:Get(player, d.DailyGift.LastClaim) > DAY then
