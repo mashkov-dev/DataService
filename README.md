@@ -205,9 +205,11 @@ end)
 
 
 ## Client API
-> [!IMPORTANT]
-> You don't need to initialize DataService on client.<br>
+> [!WARNING]
 > Requiring of DataService on client yields until initial data is not received.
+
+> [!NOTE]
+> You don't need to initialize DataService on client.
 
 #### `DataService.Get<T>(self: DataService, path: T): T`
 Returns data on path `path`. You can also index path with different values. And you will still get autocomplete and typechecking.
@@ -225,21 +227,21 @@ local firstItem = DataService:Get(d.Items[1])
 Sets value to `value` in data on path `path`.
 
 ```lua
-DataService:Set(player, d.Coins, 500)
+DataService:Set(d.Coins, 500)
 
 
 local blaster = {
 	Damage = 300
 }
 
-DataService:Set(player, d.Weapons["Blaster"], blaster)
+DataService:Set(d.Weapons["Blaster"], blaster)
 ```
 ---
 #### `DataService.Update<T>(self: DataService, path: T, callback: (T) -> T): ()`
 Sets value to `callback(value)` (where `value` is current value) in data on path `path`.
 
 ```lua
-DataService:Update(player, d.Coins, function(coins: number)
+DataService:Update(d.Coins, function(coins: number)
 	return coins + 10
 end)
 ```
@@ -248,32 +250,32 @@ end)
 Inserts value `value` in index `index` into array on path `path`.
 
 ```lua
-DataService:Insert(player, d.FriendIds, 125252232342)
+DataService:Insert(d.FriendIds, 125252232342)
 ```
 ---
 #### `DataService.Remove<T>(self: DataService, path: {T}, index: number?): T`
 Removes value in index `index` from array on path `path`. Returns removed value.
 
 ```lua
-local friendId = DataService:Remove(player, d.FriendIds)
+local friendId = DataService:Remove(d.FriendIds)
 ```
 ---
 #### `DataService.GetChangedSignal<T>(self: DataService, path: T): Signal<T>`
-Returns signal which is fired when `DataService:Set(player, path, ...)` or `DataService:Update(player, path, ...)` was called. Callback receives new value of data on path `path`.
+Returns signal which is fired when `DataService:Set(path, ...)` or `DataService:Update(path, ...)` was called. Callback receives new value of data on path `path`.
 
 ```lua
-DataService:GetChangedSignal(player, d.Coins):Connect(function(coins: number)
+DataService:GetChangedSignal(d.Coins):Connect(function(coins: number)
 	print(coins) -- 100
 end)
 
-DataService:Set(player, d.Coins, 100)
+DataService:Set(d.Coins, 100)
 ```
 ---
 #### `DataService.GetKeyChangedSignal<T, U>(self: DataService, path: {[T]: U}): Signal<T, U>`
-Returns signal which is fired when `DataService:Set(player, path[key], ...)` or `DataService:Update(player, path[key], ...)` was called. Callback receives `key` and new value of data on path `path[key]`.
+Returns signal which is fired when `DataService:Set(path[key], ...)` or `DataService:Update(path[key], ...)` was called. Callback receives `key` and new value of data on path `path[key]`.
 
 ```lua
-DataService:GetKeyChangedSignal(player, d.Blasters):Connect(function(blasterId: string, blaster: Blaster)
+DataService:GetKeyChangedSignal(d.Blasters):Connect(function(blasterId: string, blaster: Blaster)
 	print(blasterId, blaster) -- uniqueId, {Damage = 300}
 end)
 
@@ -282,29 +284,29 @@ local blaster = {
 	Damage = 300
 }
 
-DataService:Set(player, d.Blasters[uniqueId], blaster)
+DataService:Set(d.Blasters[uniqueId], blaster)
 ```
 ---
 #### `DataService.GetInsertSignal<T>(self: DataService, path: {T}): Signal<number, T>`
-Returns signal which is fired when `DataService:Insert(player, path, ...)` was called. Callback receives index of inserted value and this value itself.
+Returns signal which is fired when `DataService:Insert(path, ...)` was called. Callback receives index of inserted value and this value itself.
 
 ```lua
-DataService:GetInsertSignal(player, d.FriendIds):Connect(function(index: number, friendId: number)
+DataService:GetInsertSignal(d.FriendIds):Connect(function(index: number, friendId: number)
 	print(index, friendId) -- index, 212121131
 end)
 
 
-DataService:Insert(player, d.FriendIds, 212121131)
+DataService:Insert(d.FriendIds, 212121131)
 ```
 ---
 #### `DataService.GetRemoveSignal<T>(self: DataService, path: {T}): Signal<number, T>`
-Returns signal which is fired when `DataService:Remove(player, path, ...)` was called. Callback receives index of removed value and this value itself.
+Returns signal which is fired when `DataService:Remove(path, ...)` was called. Callback receives index of removed value and this value itself.
 
 ```lua
-DataService:GetRemoveSignal(player, d.FriendIds):Connect(function(index: number, friendId: number)
+DataService:GetRemoveSignal(d.FriendIds):Connect(function(index: number, friendId: number)
 	print(index, friendId) -- 3, value
 end)
 
 
-local value = DataService:Remove(player, d.FriendIds, 3)
+local value = DataService:Remove(d.FriendIds, 3)
 ```
