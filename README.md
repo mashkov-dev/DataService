@@ -68,7 +68,7 @@ Overridable method which is called before data is sent to client and before any 
 > It is recommended to use `onPlayerInit(...)` only for testing when you want to tweak some values in player data before client and other scripts access it. Use `DataLoaded` signal instead if you want to modify data of a player before it will be sent to him.
 
 > [!CAUTION]
-> Override this method before calling `:Init(...)` and use only "raw" data (don't call any API methods such as `:Get()`, `:Set()`).
+> Override this method before calling `:Init(...)` and use only "raw" data (don't call any API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc.
 
 ```lua
 type Data = typeof(d)
