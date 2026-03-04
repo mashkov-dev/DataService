@@ -189,6 +189,8 @@ local value = DataService:Remove(player, d.FriendIds, 3)
 ---
 #### `DataService.DataLoaded: Signal<Player>`
 Returns signal which is fired AFTER `.onPlayerInit(player, data)` finished its execution but BEFORE data was sent to client. Use API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc. to read/write into the data before it will be sent to client. Only server-side data signals will react to this changes.
+> [!NOTE]
+> If connected callback yields, data changes related to it will arrive to client as "updates", not as a part of initial data.
 
 ```lua
 DataService.DataLoaded:Connect(function(player: Player)
@@ -199,3 +201,5 @@ DataService.DataLoaded:Connect(function(player: Player)
 	end
 end)
 ```
+> [!NOTE]
+> If you want to change data right before player leaves, just change it on `PlayerRemoving` event. Currently I simply defer removing Profile of player when `PlayerRemoving` is fired. Make sure that your `PlayerRemoving` callback doesn't yield.
