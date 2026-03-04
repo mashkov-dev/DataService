@@ -200,7 +200,7 @@ local value = DataService:Remove(player, d.FriendIds, 3)
 ```
 ---
 #### `DataService.DataLoaded: Signal<Player>`
-Signal which is fired AFTER `.onPlayerInit(player, data)` finished its execution but BEFORE data was sent to client. Use API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc. to read/write into the data before it is sent to client. Only server-side data signals will react to these changes (considering that callback doesn't yield).
+Signal which is fired AFTER `.onPlayerInit(player, data)` finishes its execution but BEFORE data is sent to client. Use API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc. to read/write into the data before it is sent to client. Only server-side data signals will react to these changes (considering that callback doesn't yield, read "Note" below).
 ```lua
 DataService.DataLoaded:Connect(function(player: Player)
 	if os.clock() - DataService:Get(player, d.DailyGift.LastClaim) > DAY then
