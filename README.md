@@ -6,7 +6,7 @@
 
 </div>
 
-DataService is a Roblox module that manages player data. It takes DataStore management from [ProfileStore](https://github.com/MadStudioRoblox/ProfileStore), inspired by simple API and data replication of [leif's DataService](https://github.com/leifstout/dataService) and adds autocomplete and typechecking on top of it, which makes it really easy to use in any game.
+DataService is a Roblox module that manages player data. It takes DataStore management from [ProfileStore](https://github.com/MadStudioRoblox/ProfileStore), is inspired by simple API and data replication of [leif's DataService](https://github.com/leifstout/dataService), and adds autocomplete and typechecking on top of it, which makes it really easy to use in any game.
 
 
 ## Setup
