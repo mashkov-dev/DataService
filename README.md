@@ -90,3 +90,26 @@ local blasterDamage = DataService:Get(d.Blasters[uniqueId].Damage)
 
 local firstItem = DataService:Get(d.Items[1])
 ```
+---
+#### `DataService.Set<T>(self: DataService, player: Player, path: T, value: T, dontReplicate: boolean?): ()`
+Sets value to `value` in data of player `player` on path `path`. Change will not be replicated to client if `dontReplicate` is set to `true`.
+
+```lua
+DataService:Set(player, d.Coins, 500)
+
+
+local blaster = {
+	Damage = 300
+}
+
+DataService:Set(player, d.Weapons["Blaster"], blaster)
+```
+---
+#### `DataService.Update<T>(self: DataService, player: Player, path: T, callback: (T) -> T, dontReplicate: boolean?): ()`
+Sets value to `callback(value)` (where `value` is current value) in data of player `player` on path `path`. Change will not be replicated to client if `dontReplicate` is set to `true`.
+
+```lua
+DataService:Update(player, d.Coins, function(coins: number)
+	return coins + 10
+end)
+```
