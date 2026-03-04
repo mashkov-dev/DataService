@@ -103,6 +103,20 @@ local blaster = {
 
 DataService:Set(player, d.Weapons["Blaster"], blaster)
 ```
+> [!WARNING]
+> For some reasons, type solver might not like type of `value` if you try to define it right in the call. Currently I don't know how to fix it:
+> ```lua
+>DataService:Set(player, d.Weapons["Blaster"], {
+>	Damage = 300
+>}) — doesn't like it
+>
+>local blaster = {
+>	 Damage = 300
+>}
+> 
+>DataService:Set(player, d.Weapons["Blaster"], blaster) -- good
+> ```
+
 ---
 #### `DataService.Update<T>(self: DataService, player: Player, path: T, callback: (T) -> T, dontReplicate: boolean?): ()`
 Sets value to `callback(value)` (where `value` is current value) in data of player `player` on path `path`. Change will not be replicated to client if `dontReplicate` is set to `true`.
