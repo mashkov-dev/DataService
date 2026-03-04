@@ -113,3 +113,17 @@ DataService:Update(player, d.Coins, function(coins: number)
 	return coins + 10
 end)
 ```
+---
+#### `DataService.Insert<T>(self: DataService, player: Player, path: {T}, value: T, index: number?, dontReplicate: boolean?): ()`
+Inserts value `value` in index `index` into array on path `path`. Change will not be replicated to client if `dontReplicate` is set to `true`.
+
+```lua
+DataService:Insert(player, d.FriendIds, 125252232342)
+```
+---
+#### `DataService.Remove<T>(self: DataService, player: Player, path: {T}, index: number?, dontReplicate: boolean?): T`
+Removes value in index `index` from array on path `path`. Returns removed value. Change will not be replicated to client if `dontReplicate` is set to `true`.
+
+```lua
+local friendId = DataService:Remove(player, d.FriendIds)
+```
