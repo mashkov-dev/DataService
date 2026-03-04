@@ -146,7 +146,7 @@ end)
 DataService:Set(player, d.Coins, 100)
 ```
 ---
-#### `DataService.GetKeyChangedSignal<T>(self: DataService, player: Player, path: {[T]: U}): Signal<T, U>`
+#### `DataService.GetKeyChangedSignal<T, U>(self: DataService, player: Player, path: {[T]: U}): Signal<T, U>`
 Returns signal which is fired when `DataService:Set(player, path[key], ...)` or `DataService:Update(player, path[key], ...)` was called. Callback receives `key` and new value of data on path `path[key]`.
 
 ```lua
