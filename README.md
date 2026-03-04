@@ -6,7 +6,7 @@
 
 </div>
 
-DataService is a Roblox module that manages player data. It takes DataStore management from [ProfileStore](https://github.com/MadStudioRoblox/ProfileStore), inspired by simple API and data replication of [leif's DataService](https://github.com/leifstout/dataService) and adds on top of it autocomplete and typechecking, which makes it really easy to use in any game.
+DataService is a Roblox module that manages player data. It takes DataStore management from [ProfileStore](https://github.com/MadStudioRoblox/ProfileStore), inspired by simple API and data replication of [leif's DataService](https://github.com/leifstout/dataService) and adds autocomplete and typechecking on top of it, which makes it really easy to use in any game.
 
 
 ## Setup
@@ -28,13 +28,13 @@ local DataService = require(Path.To.DataService).Server
 local d = DataService.d
 ```
 
-"d" (short from "data") is "autocompleter" which is used to pass data path into methods.
+"d" (short for "data") is "autocompleter" which is used to pass data path into methods.
 
 ## Server API
 
 `type Options = {`<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`Template: any` — table that contains template of data<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DatastoreKey: string` — key which will be used in ProfileStore<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DatastoreKey: string` — key that will be used in ProfileStore<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`UseMock: boolean?` — use empty Profile (for testing)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`DontSave: boolean?` — don't apply changes to data (for testing)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`ViewedUserId: number?` — play on data of user with id `userId`, but don't apply changes to it (for debugging)<br>
@@ -79,7 +79,7 @@ end
 > It is recommended to use `onPlayerInit(...)` only for testing when you want to tweak some values in player's data before client and other scripts access it. Use `DataLoaded` signal instead if you want to modify data of a player before it is sent to him or when you just want to react on player's data appearance.
 ---
 #### `DataService.Get<T>(self: DataService, player: Player, path: T): T`
-Returns data of `player` on path `path`. You can dynamically index the path using variables while still retaining autocomplete and type checking.
+Returns data of `player` at path `path`. You can dynamically index the path using variables while still retaining autocomplete and type checking.
 
 ```lua
 local coins = DataService:Get(player, d.Coins)
@@ -91,7 +91,7 @@ local firstItem = DataService:Get(player, d.Items[1])
 ```
 ---
 #### `DataService.Set<T>(self: DataService, player: Player, path: T, value: T, dontReplicate: boolean?): ()`
-Sets value to `value` in data of player `player` on path `path`. Change will not be replicated to client if `dontReplicate` is set to `true`.
+Sets value to `value` in data of player `player` at path `path`. Change will not be replicated to client if `dontReplicate` is set to `true`.
 
 ```lua
 DataService:Set(player, d.Coins, 500)
@@ -119,7 +119,7 @@ DataService:Set(player, d.Weapons["Blaster"], blaster)
 
 ---
 #### `DataService.Update<T>(self: DataService, player: Player, path: T, callback: (T) -> T, dontReplicate: boolean?): ()`
-Sets value to `callback(value)` (where `value` is current value) in data of player `player` on path `path`. Change will not be replicated to client if `dontReplicate` is set to `true`.
+Sets value to `callback(value)` (where `value` is current value) in data of player `player` at path `path`. Change will not be replicated to client if `dontReplicate` is set to `true`.
 
 ```lua
 DataService:Update(player, d.Coins, function(coins: number)
@@ -128,14 +128,14 @@ end)
 ```
 ---
 #### `DataService.Insert<T>(self: DataService, player: Player, path: {T}, value: T, index: number?, dontReplicate: boolean?): ()`
-Inserts value `value` at index `index` into array on path `path` in data of player `player`. Change will not be replicated to client if `dontReplicate` is set to `true`.
+Inserts value `value` at index `index` into array at path `path` in data of player `player`. Change will not be replicated to client if `dontReplicate` is set to `true`.
 
 ```lua
 DataService:Insert(player, d.FriendIds, 125252232342)
 ```
 ---
 #### `DataService.Remove<T>(self: DataService, player: Player, path: {T}, index: number?, dontReplicate: boolean?): T`
-Removes value at index `index` from array on path `path` in data of player `player`. Returns removed value. Change will not be replicated to client if `dontReplicate` is set to `true`.
+Removes value at index `index` from array at path `path` in data of player `player`. Returns removed value. Change will not be replicated to client if `dontReplicate` is set to `true`.
 
 ```lua
 local friendId = DataService:Remove(player, d.FriendIds)
@@ -149,7 +149,7 @@ local hasData = DataService:HasData(player)
 ```
 ---
 #### `DataService.GetChangedSignal<T>(self: DataService, player: Player, path: T): Signal<T>`
-Returns signal which is fired when `DataService:Set(player, path, ...)` or `DataService:Update(player, path, ...)` was called. Callback receives new value of data on path `path`.
+Returns signal which is fired when `DataService:Set(player, path, ...)` or `DataService:Update(player, path, ...)` was called. Callback receives new value of data at path `path`.
 
 ```lua
 DataService:GetChangedSignal(player, d.Coins):Connect(function(coins: number)
@@ -160,7 +160,7 @@ DataService:Set(player, d.Coins, 100)
 ```
 ---
 #### `DataService.GetKeyChangedSignal<T, U>(self: DataService, player: Player, path: {[T]: U}): Signal<T, U>`
-Returns signal which is fired when `DataService:Set(player, path[key], ...)` or `DataService:Update(player, path[key], ...)` was called. Callback receives `key` and new value of data on path `path[key]`.
+Returns signal which is fired when `DataService:Set(player, path[key], ...)` or `DataService:Update(player, path[key], ...)` was called. Callback receives `key` and new value of data at path `path[key]`.
 
 ```lua
 DataService:GetKeyChangedSignal(player, d.Blasters):Connect(function(blasterId: string, blaster: Blaster)
@@ -225,7 +225,7 @@ end)
 > You don't need to initialize DataService on client.
 
 #### `DataService.Get<T>(self: DataService, path: T): T`
-Returns data on path `path`. You can dynamically index the path using variables while still retaining autocomplete and type checking.
+Returns data at path `path`. You can dynamically index the path using variables while still retaining autocomplete and type checking.
 
 ```lua
 local coins = DataService:Get(d.Coins)
@@ -237,7 +237,7 @@ local firstItem = DataService:Get(d.Items[1])
 ```
 ---
 #### `DataService.Set<T>(self: DataService, path: T, value: T): ()`
-Sets value to `value` in data on path `path`.
+Sets value to `value` in data at path `path`.
 > [!WARNING]
 > This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
@@ -253,7 +253,7 @@ DataService:Set(d.Weapons["Blaster"], blaster)
 ```
 ---
 #### `DataService.Update<T>(self: DataService, path: T, callback: (T) -> T): ()`
-Sets value to `callback(value)` (where `value` is current value) in data on path `path`.
+Sets value to `callback(value)` (where `value` is current value) in data at path `path`.
 > [!WARNING]
 > This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
@@ -264,7 +264,7 @@ end)
 ```
 ---
 #### `DataService.Insert<T>(self: DataService, path: {T}, value: T, index: number?): ()`
-Inserts value `value` at index `index` into array on path `path` in data.
+Inserts value `value` at index `index` into array at path `path` in data.
 > [!WARNING]
 > This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
@@ -273,7 +273,7 @@ DataService:Insert(d.FriendIds, 125252232342)
 ```
 ---
 #### `DataService.Remove<T>(self: DataService, path: {T}, index: number?): T`
-Removes value at index `index` from array on path `path` in data. Returns removed value.
+Removes value at index `index` from array at path `path` in data. Returns removed value.
 > [!WARNING]
 > This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
@@ -282,7 +282,7 @@ local friendId = DataService:Remove(d.FriendIds)
 ```
 ---
 #### `DataService.GetChangedSignal<T>(self: DataService, path: T): Signal<T>`
-Returns signal which is fired when `DataService:Set(path, ...)` or `DataService:Update(path, ...)` was called. Callback receives new value of data on path `path`.
+Returns signal which is fired when `DataService:Set(path, ...)` or `DataService:Update(path, ...)` was called. Callback receives new value of data at path `path`.
 
 ```lua
 DataService:GetChangedSignal(d.Coins):Connect(function(coins: number)
@@ -293,7 +293,7 @@ DataService:Set(d.Coins, 100)
 ```
 ---
 #### `DataService.GetKeyChangedSignal<T, U>(self: DataService, path: {[T]: U}): Signal<T, U>`
-Returns signal which is fired when `DataService:Set(path[key], ...)` or `DataService:Update(path[key], ...)` was called. Callback receives `key` and new value of data on path `path[key]`.
+Returns signal which is fired when `DataService:Set(path[key], ...)` or `DataService:Update(path[key], ...)` was called. Callback receives `key` and new value of data at path `path[key]`.
 
 ```lua
 DataService:GetKeyChangedSignal(d.Blasters):Connect(function(blasterId: string, blaster: Blaster)
@@ -333,7 +333,7 @@ local value = DataService:Remove(d.FriendIds, 3)
 ```
 ---
 #### `DataService.Fetch<T>(self: DataService, path: T, dontSet: boolean?): T`
-Fetches value on path `path` in data. Doesn't set the fetched value if `dontSet` is set to `true`. Returns fetched value.
+Fetches value at path `path` in data. Doesn't set the fetched value if `dontSet` is set to `true`. Returns fetched value.
 > [!WARNING]
 > This method should be used only if you desynced data with server. Otherwise, use `:Get(...)` instead.
 
