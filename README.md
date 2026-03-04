@@ -127,3 +127,10 @@ Removes value in index `index` from array on path `path`. Returns removed value.
 ```lua
 local friendId = DataService:Remove(player, d.FriendIds)
 ```
+---
+#### `DataService.HasData(self: DataService, player: Player): boolean`
+Returns `true` is there is data related to `player`.
+
+```lua
+local hasData = DataService:HasData(player)
+```
