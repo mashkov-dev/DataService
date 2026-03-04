@@ -83,12 +83,12 @@ end
 Returns data of `player` on path `path`. You can also index path with different values. And you will still get autocomplete and typechecking.
 
 ```lua
-local coins = DataService:Get(d.Coins)
+local coins = DataService:Get(player, d.Coins)
 
 local uniqueId = "reg3#./sap"
-local blasterDamage = DataService:Get(d.Blasters[uniqueId].Damage)
+local blasterDamage = DataService:Get(player, d.Blasters[uniqueId].Damage)
 
-local firstItem = DataService:Get(d.Items[1])
+local firstItem = DataService:Get(player, d.Items[1])
 ```
 ---
 #### `DataService.Set<T>(self: DataService, player: Player, path: T, value: T, dontReplicate: boolean?): ()`
@@ -202,3 +202,21 @@ end)
 
 > [!NOTE]
 > If you want to change data right before player leaves, just change it on `PlayerRemoving` event. Currently I simply defer removing Profile of player when `PlayerRemoving` is fired. Make sure that your `PlayerRemoving` callback doesn't yield.
+
+
+## Client API
+> [!NOTE]
+> You don't need to initialize DataService on client. Requiring of DataService on client yields until initial data is not received.
+
+#### `DataService.Get<T>(self: DataService, path: T): T`
+Returns data of `player` on path `path`. You can also index path with different values. And you will still get autocomplete and typechecking.
+
+```lua
+local coins = DataService:Get(d.Coins)
+
+local uniqueId = "reg3#./sap"
+local blasterDamage = DataService:Get(d.Blasters[uniqueId].Damage)
+
+local firstItem = DataService:Get(d.Items[1])
+```
+---
