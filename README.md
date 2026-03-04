@@ -225,7 +225,7 @@ local firstItem = DataService:Get(d.Items[1])
 #### `DataService.Set<T>(self: DataService, path: T, value: T): ()`
 Sets value to `value` in data on path `path`.
 > [!WARNING]
-> This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, player disabled music in settings and you want to immediately disable music on a client without waiting for server to confirm this action).
+> This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
 ```lua
 DataService:Set(d.Coins, 500)
