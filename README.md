@@ -108,7 +108,7 @@ DataService:Set(player, d.Weapons["Blaster"], blaster)
 > ```lua
 >DataService:Set(player, d.Weapons["Blaster"], {
 >	Damage = 300
->}) — doesn't like it
+>}) -- doesn't like it
 >
 >local blaster = {
 >	 Damage = 300
