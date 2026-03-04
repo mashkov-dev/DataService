@@ -4,7 +4,7 @@
 
 ## Lightweight player data service with autocomplete and typechecking.
 
-[Creator Store](https://www.google.com/)
+[Creator Store](https://create.roblox.com/store/asset/101261204868449/DataService)
 
 </div>
 
