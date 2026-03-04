@@ -51,7 +51,7 @@ DataService:Init({
 ```
 
 > [!WARNING]
-> If you have empty tables in DataTemplate you should need to explicitly set their type for typechecking to work correctly:
+> If you have empty tables in DataTemplate you should need to explicitly set their types for typechecking to work correctly:
 > ```lua
 >local template = {
 >	Coins = 0,
