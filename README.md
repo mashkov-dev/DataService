@@ -162,3 +162,27 @@ local blaster = {
 
 DataService:Set(player, d.Blasters[uniqueId], blaster)
 ```
+---
+#### `DataService.GetInsertSignal<T>(self: DataService, player: Player, path: {T}): Signal<number, T>`
+Returns signal which is fired when `DataService:Insert(player, path, ...)` was called. Callback receives index of inserted value and this value itself.
+
+```lua
+DataService:GetInsertSignal(player, d.FriendIds):Connect(function(index: number, friendId: number)
+	print(index, friendId) -- index, 212121131
+end)
+
+
+DataService:Insert(player, d.FriendIds, 212121131)
+```
+---
+#### `DataService.GetRemoveSignal<T>(self: DataService, player: Player, path: {T}): Signal<number, T>`
+Returns signal which is fired when `DataService:Remove(player, path, ...)` was called. Callback receives index of removed value and this value itself.
+
+```lua
+DataService:GetRemoveSignal(player, d.FriendIds):Connect(function(index: number, friendId: number)
+	print(index, friendId) -- 3, value
+end)
+
+
+local value = DataService:Remove(player, d.FriendIds, 3)
+```
