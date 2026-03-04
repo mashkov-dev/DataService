@@ -250,7 +250,7 @@ end)
 ```
 ---
 #### `DataService.Insert<T>(self: DataService, path: {T}, value: T, index: number?): ()`
-Inserts value `value` in index `index` into array on path `path`.
+Inserts value `value` in index `index` into array on path `path` in data.
 > [!WARNING]
 > This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
@@ -259,7 +259,7 @@ DataService:Insert(d.FriendIds, 125252232342)
 ```
 ---
 #### `DataService.Remove<T>(self: DataService, path: {T}, index: number?): T`
-Removes value in index `index` from array on path `path`. Returns removed value.
+Removes value in index `index` from array on path `path` in data. Returns removed value.
 > [!WARNING]
 > This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
@@ -316,4 +316,17 @@ end)
 
 
 local value = DataService:Remove(d.FriendIds, 3)
+```
+---
+#### `DataService.Fetch<T>(self: DataService, path: T, dontSet: boolean?): T`
+Fetches value on path `path` in data. Doesn't set the fetched value if `dontSet` is set to `true`. Returns fetched value.
+> [!WARNING]
+> This method should be used only if you desynced data with server. Otherwise, use `:Get(...)` instead.
+
+```lua
+DataService:Get(d.Coins) -- 50
+DataService:Set(d.Coins, 100)
+
+local fetched = DataService:Fetch(d.Coins)
+print(fetched) -- 50
 ```
