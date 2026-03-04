@@ -104,7 +104,7 @@ local blaster = {
 DataService:Set(player, d.Weapons["Blaster"], blaster)
 ```
 > [!WARNING]
-> For some reason, type solver might not like type of `value` if you try to define it right in the call. Currently I don't know how to fix it:
+> For some reason, type solver may fail to infer the type of `value` if you try to define it right in the call. Currently I don't know how to fix it:
 > ```lua
 >DataService:Set(player, d.Weapons["Blaster"], {
 >	Damage = 300
@@ -200,7 +200,7 @@ local value = DataService:Remove(player, d.FriendIds, 3)
 ```
 ---
 #### `DataService.DataLoaded: Signal<Player>`
-Signal which is fired AFTER `.onPlayerInit(player, data)` finished its execution but BEFORE data was sent to client. Use API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc. to read/write into the data before it is sent to client. Only server-side data signals will react to this changes (considering that callback doesn't yield).
+Signal which is fired AFTER `.onPlayerInit(player, data)` finished its execution but BEFORE data was sent to client. Use API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc. to read/write into the data before it is sent to client. Only server-side data signals will react to these changes (considering that callback doesn't yield).
 ```lua
 DataService.DataLoaded:Connect(function(player: Player)
 	if os.clock() - DataService:Get(player, d.DailyGift.LastClaim) > DAY then
