@@ -64,9 +64,6 @@ DataService:Init({
 #### `DataService.onPlayerInit(player: Player, data: Data): ()`
 Overridable method which is called before data is sent to client and before any other script starts to modify player data. Doesn't trigger any signals. Empty by default.
 
-> [!NOTE]
-> It is recommended to use `onPlayerInit(...)` only for testing when you want to tweak some values in player's data before client and other scripts access it. Use `DataLoaded` signal instead if you want to modify data of a player before it will be sent to him or when you just want to react on player's data.
-
 > [!CAUTION]
 > Override this method before calling `:Init(...)` and use only "raw" data (don't call any API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc).
 
@@ -78,6 +75,8 @@ DataService.onPlayerInit = function(player: Player, data: Data)
 	table.insert(data.Weapons, "Blaster")
 end
 ```
+> [!NOTE]
+> It is recommended to use `onPlayerInit(...)` only for testing when you want to tweak some values in player's data before client and other scripts access it. Use `DataLoaded` signal instead if you want to modify data of a player before it will be sent to him or when you just want to react on player's data appearance.
 ---
 #### `DataService.Get<T>(self: DataService, player: Player, path: T): T`
 Returns data of `player` on path `path`. You can also index path with different values. And you will still get autocomplete and typechecking.
@@ -225,6 +224,8 @@ local firstItem = DataService:Get(d.Items[1])
 ---
 #### `DataService.Set<T>(self: DataService, path: T, value: T): ()`
 Sets value to `value` in data on path `path`.
+> [!WARNING]
+> This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, player disabled music in settings and you want to immediately disable music on a client without waiting for server to confirm this action).
 
 ```lua
 DataService:Set(d.Coins, 500)
