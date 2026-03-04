@@ -205,8 +205,9 @@ end)
 
 
 ## Client API
-> [!NOTE]
-> You don't need to initialize DataService on client. Requiring of DataService on client yields until initial data is not received.
+> [!IMPORTANT]
+> You don't need to initialize DataService on client.<br>
+> Requiring of DataService on client yields until initial data is not received.
 
 #### `DataService.Get<T>(self: DataService, path: T): T`
 Returns data on path `path`. You can also index path with different values. And you will still get autocomplete and typechecking.
