@@ -2,11 +2,11 @@
 
 # DataService
 
-## Small player's data handler with autocomplete and typechecking.
+## Small player data handler with autocomplete and typechecking.
 
 </div>
 
-DataService is a Roblox module which handles data of your players. It takes DataStore management from [ProfileStore](https://github.com/MadStudioRoblox/ProfileStore), simple API and data replication from [leif`s DataService](https://github.com/leifstout/dataService) and adds on top of it autocomplete and typechecking which makes it really easy to use in any game.
+DataService is a Roblox module which handles data of your players. It takes DataStore management from [ProfileStore](https://github.com/MadStudioRoblox/ProfileStore), simple API and data replication from [leif`s DataService](https://github.com/leifstout/dataService) and adds on top of it autocomplete and typechecking, which makes it really easy to use in any game.
 
 
 ## Setup
@@ -142,7 +142,7 @@ local friendId = DataService:Remove(player, d.FriendIds)
 ```
 ---
 #### `DataService.HasData(self: DataService, player: Player): boolean`
-Returns `true` is there is data related to player `player`.
+Returns `true` if there is data related to player `player`.
 
 ```lua
 local hasData = DataService:HasData(player)
@@ -219,7 +219,7 @@ end)
 
 ## Client API
 > [!WARNING]
-> Requiring of DataService on client yields until initial data is not received.
+> Requiring DataService on client yields until initial data is not received.
 
 > [!NOTE]
 > You don't need to initialize DataService on client.
