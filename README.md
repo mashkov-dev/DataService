@@ -134,3 +134,25 @@ Returns `true` is there is data related to `player`.
 ```lua
 local hasData = DataService:HasData(player)
 ```
+---
+#### `DataService.GetChangedSignal<T>(self: DataService, player: Player, path: T): Signal<T>`
+Returns signal which is fired when `DataService:Set(player, path, ...)` or `DataService:Update(player, path, ...)` was called. Callback receives new value of data on path `path`.
+
+```lua
+DataService:GetChangedSignal(player, d.Coins):Connect(function(coins: number)
+	print(coins) -- 100
+end)
+
+DataService:Set(player, d.Coins, 100)
+```
+---
+#### `DataService.GetKeyChangedSignal<T>(self: DataService, player: Player, path: {[T]: U}): Signal<T, U>`
+Returns signal which is fired when `DataService:Set(player, path[key], ...)` or `DataService:Update(player, path[key], ...)` was called. Callback receives `key` and new value of data on path `path[key]`.
+
+```lua
+DataService:GetChangedSignal(player, d.Coins):Connect(function(coins: number)
+	print(coins) -- 100
+end)
+
+DataService:Set(player, d.Coins, 100)
+```
