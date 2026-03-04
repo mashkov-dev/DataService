@@ -150,9 +150,15 @@ DataService:Set(player, d.Coins, 100)
 Returns signal which is fired when `DataService:Set(player, path[key], ...)` or `DataService:Update(player, path[key], ...)` was called. Callback receives `key` and new value of data on path `path[key]`.
 
 ```lua
-DataService:GetChangedSignal(player, d.Coins):Connect(function(coins: number)
-	print(coins) -- 100
+DataService:GetKeyChangedSignal(player, d.Blasters):Connect(function(blasterId: string, blaster: Blaster)
+	print(blasterId, blaster) -- uniqueId, {Damage = 300}
+
 end)
 
-DataService:Set(player, d.Coins, 100)
+
+local blaster = {
+	Damage = 300
+}
+
+DataService:Set(player, d.Blasters[uniqueId], blaster)
 ```
