@@ -240,6 +240,8 @@ DataService:Set(d.Weapons["Blaster"], blaster)
 ---
 #### `DataService.Update<T>(self: DataService, path: T, callback: (T) -> T): ()`
 Sets value to `callback(value)` (where `value` is current value) in data on path `path`.
+> [!WARNING]
+> This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
 ```lua
 DataService:Update(d.Coins, function(coins: number)
@@ -249,6 +251,8 @@ end)
 ---
 #### `DataService.Insert<T>(self: DataService, path: {T}, value: T, index: number?): ()`
 Inserts value `value` in index `index` into array on path `path`.
+> [!WARNING]
+> This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
 ```lua
 DataService:Insert(d.FriendIds, 125252232342)
@@ -256,6 +260,8 @@ DataService:Insert(d.FriendIds, 125252232342)
 ---
 #### `DataService.Remove<T>(self: DataService, path: {T}, index: number?): T`
 Removes value in index `index` from array on path `path`. Returns removed value.
+> [!WARNING]
+> This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
 ```lua
 local friendId = DataService:Remove(d.FriendIds)
