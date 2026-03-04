@@ -49,6 +49,16 @@ DataService:Init({
 	DatastoreKey = "Test"
 })
 ```
+
+> [!WARNING]
+> If you have empty tables in DataTemplate you should need to explicitly set their type for typechecking to work correctly:
+> ```lua
+>local template = {
+>	Coins = 0,
+>	Weapons = {} :: {string},
+>	Friends = {} :: {[string]: number}
+>}
+>```
 ---
 `type Data = typeof(d)`
 #### `DataService.onPlayerInit(player: Player, data: Data): ()`
@@ -58,16 +68,25 @@ Overridable method which is called before data is sent to client and before any 
 > It is recommended to use `onPlayerInit(...)` only for testing when you want to tweak some values in player data before client and other scripts access it. Use `DataLoaded` signal instead if you want to modify data of a player before it will be sent to him.
 
 > [!CAUTION]
-> Override this method before calling `:Init(...)`
+> Override this method before calling `:Init(...)` and use only "raw" data (don't call any API methods such as `:Get()`, `:Set()`).
 
 ```lua
 type Data = typeof(d)
 
 DataService.onPlayerInit = function(player: Player, data: Data)
-	data.coins = 5
-	table.insert(data.weapons, 50)
+	data.Coins = 5
+	table.insert(data.Weapons, "Blaster")
 end
 ```
 ---
-#### `DataService.DataLoaded(player: Player, data: Data): ()`
-Overridable method which is called before data is sent to client and before any other script starts to modify player data. Doesn't trigger any signals.
+#### `DataService.Get<T>(self: DataService, player: Player, path: T): T`
+Returns data of `player` on path `path`. You can also index path with different values.
+
+```lua
+local coins = DataService:Get(d.Coins)
+
+local uniqueId = "reg3#./sap"
+local blasterDamage = DataService:Get(d.Blasters[uniqueId].Damage)
+
+local firstItem = DataService:Get(d.Items[1])
+```
