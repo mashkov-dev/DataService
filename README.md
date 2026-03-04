@@ -129,7 +129,7 @@ local friendId = DataService:Remove(player, d.FriendIds)
 ```
 ---
 #### `DataService.HasData(self: DataService, player: Player): boolean`
-Returns `true` is there is data related to `player`.
+Returns `true` is there is data related to player `player`.
 
 ```lua
 local hasData = DataService:HasData(player)
