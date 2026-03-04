@@ -28,7 +28,7 @@ local DataService = require(Path.To.DataService).Server
 local d = DataService.d
 ```
 
-"d" (shortened from "data") is "autocompleter" which is used to pass data path into methods.
+"d" (short from "data") is "autocompleter" which is used to pass data path into methods.
 
 ## Server API
 
@@ -128,14 +128,14 @@ end)
 ```
 ---
 #### `DataService.Insert<T>(self: DataService, player: Player, path: {T}, value: T, index: number?, dontReplicate: boolean?): ()`
-Inserts value `value` in index `index` into array on path `path` in data of player `player`. Change will not be replicated to client if `dontReplicate` is set to `true`.
+Inserts value `value` at index `index` into array on path `path` in data of player `player`. Change will not be replicated to client if `dontReplicate` is set to `true`.
 
 ```lua
 DataService:Insert(player, d.FriendIds, 125252232342)
 ```
 ---
 #### `DataService.Remove<T>(self: DataService, player: Player, path: {T}, index: number?, dontReplicate: boolean?): T`
-Removes value in index `index` from array on path `path` in data of player `player`. Returns removed value. Change will not be replicated to client if `dontReplicate` is set to `true`.
+Removes value at index `index` from array on path `path` in data of player `player`. Returns removed value. Change will not be replicated to client if `dontReplicate` is set to `true`.
 
 ```lua
 local friendId = DataService:Remove(player, d.FriendIds)
@@ -264,7 +264,7 @@ end)
 ```
 ---
 #### `DataService.Insert<T>(self: DataService, path: {T}, value: T, index: number?): ()`
-Inserts value `value` in index `index` into array on path `path` in data.
+Inserts value `value` at index `index` into array on path `path` in data.
 > [!WARNING]
 > This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
@@ -273,7 +273,7 @@ DataService:Insert(d.FriendIds, 125252232342)
 ```
 ---
 #### `DataService.Remove<T>(self: DataService, path: {T}, index: number?): T`
-Removes value in index `index` from array on path `path` in data. Returns removed value.
+Removes value at index `index` from array on path `path` in data. Returns removed value.
 > [!WARNING]
 > This change will not be sent to server. You should call this method when you want to react on the action immediately (for example, client disables music in settings and you want to immediately disable it without waiting for server to verify this action).
 
