@@ -2,7 +2,7 @@
 
 # DataService
 
-## Small player data handler with autocomplete and typechecking.
+## Lightweight player data handler with autocomplete and typechecking.
 
 </div>
 
@@ -79,7 +79,7 @@ end
 > It is recommended to use `onPlayerInit(...)` only for testing when you want to tweak some values in player's data before client and other scripts access it. Use `DataLoaded` signal instead if you want to modify data of a player before it is sent to him or when you just want to react on player's data appearance.
 ---
 #### `DataService.Get<T>(self: DataService, player: Player, path: T): T`
-Returns data of `player` on path `path`. You can also index path with different values. And you will still get autocomplete and typechecking.
+Returns data of `player` on path `path`. You can dynamically index the path using variables while still retaining autocomplete and type checking.
 
 ```lua
 local coins = DataService:Get(player, d.Coins)
@@ -225,7 +225,7 @@ end)
 > You don't need to initialize DataService on client.
 
 #### `DataService.Get<T>(self: DataService, path: T): T`
-Returns data on path `path`. You can also index path with different values. And you will still get autocomplete and typechecking.
+Returns data on path `path`. You can dynamically index the path using variables while still retaining autocomplete and type checking.
 
 ```lua
 local coins = DataService:Get(d.Coins)
