@@ -76,7 +76,7 @@ DataService.onPlayerInit = function(player: Player, data: Data)
 end
 ```
 > [!NOTE]
-> It is recommended to use `onPlayerInit(...)` only for testing when you want to tweak some values in player's data before client and other scripts access it. Use `DataLoaded` signal instead if you want to modify data of a player before it will be sent to him or when you just want to react on player's data appearance.
+> It is recommended to use `onPlayerInit(...)` only for testing when you want to tweak some values in player's data before client and other scripts access it. Use `DataLoaded` signal instead if you want to modify data of a player before it is sent to him or when you just want to react on player's data appearance.
 ---
 #### `DataService.Get<T>(self: DataService, player: Player, path: T): T`
 Returns data of `player` on path `path`. You can also index path with different values. And you will still get autocomplete and typechecking.
@@ -200,7 +200,7 @@ local value = DataService:Remove(player, d.FriendIds, 3)
 ```
 ---
 #### `DataService.DataLoaded: Signal<Player>`
-Returns signal which is fired AFTER `.onPlayerInit(player, data)` finished its execution but BEFORE data was sent to client. Use API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc. to read/write into the data before it will be sent to client. Only server-side data signals will react to this changes (considering that callback doesn't yield).
+Returns signal which is fired AFTER `.onPlayerInit(player, data)` finished its execution but BEFORE data was sent to client. Use API methods such as `:Get(...)`, `:Set(...)`, `:Update(...)` etc. to read/write into the data before it is sent to client. Only server-side data signals will react to this changes (considering that callback doesn't yield).
 ```lua
 DataService.DataLoaded:Connect(function(player: Player)
 	if os.clock() - DataService:Get(player, d.DailyGift.LastClaim) > DAY then
