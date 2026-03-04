@@ -219,7 +219,7 @@ end)
 
 ## Client API
 > [!WARNING]
-> Requiring DataService on client yields until initial data is not received.
+> Requiring DataService on client yields until initial data is received.
 
 > [!NOTE]
 > You don't need to initialize DataService on client.
