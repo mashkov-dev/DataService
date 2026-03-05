@@ -193,7 +193,7 @@ function DataServiceServer.Get<T>(self: DataServiceServer, player: Player, path:
 	
 	local current = self._profiles[player].Data
 	for _, v in pathTable do
-		assert(current[v], `{v} is not key of {current}`)
+		assert(current[v] ~= nil, `{v} is not key of {current}`)
 		current = current[v]
 	end
 	
@@ -212,7 +212,7 @@ function DataServiceServer.Set<T, U>(
 	
 	local current = self._profiles[player].Data
 	for i = 1, #pathTable - 1 do
-		assert(current[pathTable[i]], `{pathTable[i]} is not key of {current}`)
+		assert(current[pathTable[i]] ~= nil, `{pathTable[i]} is not key of {current}`)
 		current = current[pathTable[i]]
 	end
 	
