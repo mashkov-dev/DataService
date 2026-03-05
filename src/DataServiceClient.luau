@@ -59,7 +59,7 @@ function DataServiceClient.Get<T>(self: DataServiceClient, path: T): T
 
 	local current = self._data
 	for _, v in pathTable do
-		assert(current[v], `{v} is not key of {current}`)
+		assert(current[v] ~= nil, `{v} is not key of {current}`)
 		current = current[v]
 	end
 
@@ -72,7 +72,7 @@ function DataServiceClient.Set<T, U>(self: DataServiceClient, path: T, value: U 
 
 	local current = self._data
 	for i = 1, #pathTable - 1 do
-		assert(current[pathTable[i]], `{pathTable[i]} is not key of {current}`)
+		assert(current[pathTable[i]] ~= nil, `{pathTable[i]} is not key of {current}`)
 		current = current[pathTable[i]]
 	end
 
